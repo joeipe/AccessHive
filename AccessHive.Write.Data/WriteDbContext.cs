@@ -22,24 +22,5 @@ namespace AccessHive.Write.Data
         //{
         //    optionsBuilder.UseSqlServer("Server=.;Database=AccessHiveDB;User Id=sa;Password=Admin1234;TrustServerCertificate=True");
         //}
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            List<Entity> entities = ChangeTracker
-                .Entries()
-                .Where(x => x.Entity is Entity)
-                .Select(x => (Entity)x.Entity)
-                .ToList();
-
-            var result = base.SaveChangesAsync(cancellationToken);
-
-            foreach (var entity in entities)
-            {
-                _eventDispatcher.Dispatch(entity.DomainEvents);
-                entity.ClearDomainEvents();
-            }
-
-            return result;
-        }
     }
 }

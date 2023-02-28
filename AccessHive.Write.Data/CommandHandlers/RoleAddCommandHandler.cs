@@ -1,4 +1,5 @@
 ﻿using AccessHive.Write.Data.Commands;
+using AccessHive.Write.Data.EventDispatchers;
 using AccessHive.Write.Data.Events;
 using AccessHive.Write.Data.Repositories;
 using CSharpFunctionalExtensions;
@@ -9,10 +10,14 @@ namespace AccessHive.Write.Data.CommandHandlers
     public sealed class RoleAddCommandHandler : IRequestHandler<RoleAddCommand, Result>
     {
         private readonly RoleRepository _roleRepository;
+        private readonly EventDispatcher _eventDispatcher;
 
-        public RoleAddCommandHandler(RoleRepository roleRepository)
+        public RoleAddCommandHandler(
+            RoleRepository roleRepository, 
+            EventDispatcher eventDispatcher)
         {
             _roleRepository = roleRepository;
+            _eventDispatcher = eventDispatcher;
         }
 
         public async Task<Result> Handle(RoleAddCommand request, CancellationToken cancellationToken)
@@ -21,8 +26,8 @@ namespace AccessHive.Write.Data.CommandHandlers
 
             if (errors.Count == 0)
             {
-                request.Role.RaiseDomainEvent(new RoleAddedEvent(request.Role.Name));
                 await _roleRepository.CreateRoleAsync(request.Role);
+                _eventDispatcher.Dispatch(new RoleAddedEvent(request.Role.Name));
                 return Result.Success();
             }
             else
