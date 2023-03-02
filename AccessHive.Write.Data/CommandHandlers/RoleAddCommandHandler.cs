@@ -4,6 +4,7 @@ using AccessHive.Write.Data.Events;
 using AccessHive.Write.Data.Repositories;
 using CSharpFunctionalExtensions;
 using MediatR;
+using static AccessHive.Write.Data.Commands.Commands;
 
 namespace AccessHive.Write.Data.CommandHandlers
 {

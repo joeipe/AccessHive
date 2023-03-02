@@ -5,6 +5,7 @@ using AccessHive.Write.Domain;
 using AutoMapper;
 using CSharpFunctionalExtensions;
 using MediatR;
+using static AccessHive.Write.Data.Commands.Commands;
 
 namespace AccessHive.Application
 {
