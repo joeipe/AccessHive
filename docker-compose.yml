@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  accesshive.api:
-    image: ${DOCKER_REGISTRY-}accesshiveapi
-    build:
-      context: .
-      dockerfile: AccessHive.API/Dockerfile
