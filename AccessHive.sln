@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccessHive_Integrations", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccessHive.Integration.MessagingBus", "AccessHive.Integration.MessagingBus\AccessHive.Integration.MessagingBus.csproj", "{E02FF42A-2408-47F7-A515-997B411DD523}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{55716B4C-864B-429F-931F-33BE7EE20989}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{E02FF42A-2408-47F7-A515-997B411DD523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E02FF42A-2408-47F7-A515-997B411DD523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E02FF42A-2408-47F7-A515-997B411DD523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55716B4C-864B-429F-931F-33BE7EE20989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55716B4C-864B-429F-931F-33BE7EE20989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55716B4C-864B-429F-931F-33BE7EE20989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55716B4C-864B-429F-931F-33BE7EE20989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
