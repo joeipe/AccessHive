@@ -6,3 +6,19 @@ services:
     build:
       context: .
       dockerfile: AccessHive.API/Dockerfile
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: 'sqlserver'
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Admin1234
+    ports:
+      - "1434:1433"
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: 'rabbitmq'
+    ports:
+        - 5673:5672
+        - 15673:15672
