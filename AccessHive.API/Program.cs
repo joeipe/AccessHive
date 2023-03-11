@@ -49,6 +49,8 @@ using (var scope = app.Services.CreateScope())
     writeDbContext.Database.Migrate();
 }
 
+app.ApplyDatabaseSchema();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
