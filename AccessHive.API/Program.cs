@@ -10,51 +10,76 @@ using AccessHive.Write.Data.EventDispatchers;
 using AccessHive.Write.Data.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Reflection;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-// Add services to the container.
-builder.Services.AddMediatR(typeof(RoleAddCommandHandler).GetTypeInfo().Assembly, typeof(GetRoleByIdQueryHandler).GetTypeInfo().Assembly);
-builder.Services.AddScoped(x =>
-    new ReadDbContext(builder.Configuration.GetConnectionString("DBConnectionString"))
-);
-builder.Services.AddDbContext<WriteDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnectionString"))
-);
-builder.Services.AddScoped<RoleRepository>();
-builder.Services.AddScoped<IAppService, AppService>();
-builder.Services.AddAutoMapperSetup();
-builder.Services.AddScoped<IBus>(c => new RmqServiceBus(builder.Configuration.GetConnectionString("RMQConnectionString")));
-builder.Services.AddScoped<MessageBus>();
-builder.Services.AddScoped<EventDispatcher>();
+Log.Information("Starting up");
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    var builder = WebApplication.CreateBuilder(args);
 
-using (var scope = app.Services.CreateScope())
+    builder.Host.UseSerilog((ctx, lc) => lc
+        .WriteTo.Console()
+        .ReadFrom.Configuration(ctx.Configuration));
+
+    // Add services to the container.
+    builder.Services.AddMediatR(typeof(RoleAddCommandHandler).GetTypeInfo().Assembly, typeof(GetRoleByIdQueryHandler).GetTypeInfo().Assembly);
+    builder.Services.AddScoped(x =>
+        new ReadDbContext(builder.Configuration.GetConnectionString("DBConnectionString"))
+    );
+    builder.Services.AddDbContext<WriteDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnectionString"))
+    );
+    builder.Services.AddScoped<RoleRepository>();
+    builder.Services.AddScoped<IAppService, AppService>();
+    builder.Services.AddAutoMapperSetup();
+    builder.Services.AddScoped<IBus>(c => new RmqServiceBus(builder.Configuration.GetConnectionString("RMQConnectionString")));
+    builder.Services.AddScoped<MessageBus>();
+    builder.Services.AddScoped<EventDispatcher>();
+
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    var app = builder.Build();
+
+    app.UseSerilogRequestLogging();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var writeDbContext = scope.ServiceProvider.GetRequiredService<WriteDbContext>();
+        writeDbContext.Database.Migrate();
+    }
+
+    app.ApplyDatabaseSchema();
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
+}
+catch (Exception ex)
 {
-    var writeDbContext = scope.ServiceProvider.GetRequiredService<WriteDbContext>();
-    writeDbContext.Database.Migrate();
+    Log.Fatal(ex, "Unhandled exception");
 }
-
-app.ApplyDatabaseSchema();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+finally
+{
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
+}
