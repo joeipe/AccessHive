@@ -20,12 +20,18 @@ namespace AccessHive.API.Controllers
         [HttpGet]
         public async Task<ActionResult> GetRole()
         {
+            using (_logger.BeginScope("GetRole"))
+            _logger.LogInformation("GetRole() Started");
+
             return Ok(await _appService.GetRoleAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetRoleById(int id)
         {
+            using (_logger.BeginScope("GetRoleById"))
+            _logger.LogInformation($"GetRoleById({id} Started)");
+
             var vm = await _appService.GetRoleByIdAsync(id);
 
             if (vm == null)
