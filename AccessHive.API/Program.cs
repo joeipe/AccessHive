@@ -58,12 +58,6 @@ try
         app.UseSwaggerUI();
     }
 
-    using (var scope = app.Services.CreateScope())
-    {
-        var writeDbContext = scope.ServiceProvider.GetRequiredService<WriteDbContext>();
-        writeDbContext.Database.Migrate();
-    }
-
     app.ApplyDatabaseSchema();
 
     app.UseHttpsRedirection();
