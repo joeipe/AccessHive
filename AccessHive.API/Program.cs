@@ -10,6 +10,7 @@ using AccessHive.Write.Data.EventDispatchers;
 using AccessHive.Write.Data.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using System.Reflection;
 
@@ -47,6 +48,11 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services
+        .AddHealthChecks()
+        .AddDbContextCheck<WriteDbContext>()
+        .AddRabbitMQConnectionHealthCheck(builder.Configuration.GetConnectionString("DBConnectionString"), "Rabbit MQ", HealthStatus.Unhealthy);
+
     var app = builder.Build();
 
     app.UseSerilogRequestLogging();
@@ -65,6 +71,8 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+
+    app.MapDefaultHealthChecks();
 
     app.Run();
 }
