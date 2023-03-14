@@ -29,6 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccessHive.Integration.Mess
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{55716B4C-864B-429F-931F-33BE7EE20989}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{6863D4E9-B5BE-410E-8082-7496BB0D61C9}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\accesshiveapi.yml = k8s\accesshiveapi.yml
+		k8s\rabbitmq.yml = k8s\rabbitmq.yml
+		k8s\sqlserver.yml = k8s\sqlserver.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

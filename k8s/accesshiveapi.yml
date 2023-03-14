@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accesshive-api
+spec:
+  selector:
+    matchLabels:
+      app: accesshive-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: accesshive-api
+    spec:
+      containers:
+        - name: accesshive-api
+          image: joeipe/accesshiveapi:latest
+          envFrom:
+            - configMapRef:
+                name: accesshive-api-config
+            # - secretRef:
+            #     name: accesshive-api-secrets
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 80
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 80
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accesshive-api-service
+spec:
+  selector:
+    app: globomantics-identity
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31633
