@@ -50,7 +50,7 @@ metadata:
   name: accesshive-api-service
 spec:
   selector:
-    app: globomantics-identity
+    app: accesshive-api
   type: NodePort
   ports:
     - protocol: TCP
