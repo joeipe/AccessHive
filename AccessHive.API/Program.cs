@@ -51,7 +51,7 @@ try
     builder.Services
         .AddHealthChecks()
         .AddDbContextCheck<WriteDbContext>()
-        .AddRabbitMQConnectionHealthCheck(builder.Configuration.GetConnectionString("RMQConnectionString"), "Rabbit MQ", HealthStatus.Unhealthy);
+        .AddRabbitMQConnectionHealthCheck(builder.Configuration.GetConnectionString("RMQConnectionString"), "Rabbit MQ", HealthStatus.Degraded);
 
     var app = builder.Build();
 
