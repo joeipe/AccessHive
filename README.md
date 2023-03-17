@@ -1,9 +1,9 @@
 # AccessHive
 
-## Docker Compose
+## Topics covered
 
-## Kubernetes
-
+#### Docker Compose
+#### Kubernetes
 Run 
 - `kubectl apply -f .\k8s\sqlserver.yml`
 - `kubectl apply -f .\k8s\rabbitmq.yml`
