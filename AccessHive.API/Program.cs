@@ -1,4 +1,5 @@
 using AccessHive.API.Configurations;
+using AccessHive.API.CustomSwaggerDocs;
 using AccessHive.Application;
 using AccessHive.Integration.MessagingBus;
 using AccessHive.Integration.MessagingBus.Interfaces;
@@ -11,6 +12,7 @@ using AccessHive.Write.Data.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection;
 
@@ -46,7 +48,11 @@ try
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new OpenApiInfo { Title = "AccessHive API", Version = "v1" });
+        options.DocumentFilter<HealthChecksFilter>();
+    });
 
     builder.Services
         .AddHealthChecks()
