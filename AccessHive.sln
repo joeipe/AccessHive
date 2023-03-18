@@ -31,6 +31,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{6863D4E9-B5BE-410E-8082-7496BB0D61C9}"
 	ProjectSection(SolutionItems) = preProject
+		k8s\accesshive-ingress.yml = k8s\accesshive-ingress.yml
 		k8s\accesshiveapi.configmap.yml = k8s\accesshiveapi.configmap.yml
 		k8s\accesshiveapi.yml = k8s\accesshiveapi.yml
 		k8s\rabbitmq.yml = k8s\rabbitmq.yml

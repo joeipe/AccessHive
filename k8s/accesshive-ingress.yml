@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: accesshive-ingress
+spec:
+  rules:
+    - host: accesshive.local.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: accesshive-api-service
+                port:
+                  number: 80
