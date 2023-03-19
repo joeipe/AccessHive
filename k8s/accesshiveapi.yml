@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: accesshive-api
-          image: joeipe/accesshiveapi:latest
+          image: accesshiveregistry.azurecr.io/accesshiveapi:latest
           envFrom:
             - configMapRef:
                 name: accesshive-api-config
