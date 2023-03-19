@@ -23,6 +23,10 @@ spec:
               value: "Y"
             - name: MSSQL_SA_PASSWORD
               value: "Admin1234"
+          resources:
+            limits:
+              memory: "2G"
+              cpu: "2000m"
 
 ---
 apiVersion: v1
