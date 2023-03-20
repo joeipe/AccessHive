@@ -17,6 +17,7 @@ namespace AccessHive.API.Configurations
 
             endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions
             {
+                Predicate = _ => _.Name.Contains("WriteDbContext"),
                 ResponseWriter = WriteJsonResponse
             });
 
