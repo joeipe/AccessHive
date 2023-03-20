@@ -13,3 +13,19 @@
 
 > - `create secret generic accesshive-api-secrets --from-literal=ConnectionStrings__DBConnectionString="" --from-literal=ConnectionStrings__RMQConnectionString=""`
 > - `kubectl scale deployment accesshive-api --replicas=2`
+
+
+> - `kubectl config get-contexts`
+> - `kubectl config current-context`
+> - `kubectl config use-context <CONTEXT_NAME>`
+
+
+> - `az login`
+> - `az acr login --name accesshiveregistry`
+> - `docker login accesshiveregistry.azurecr.io`
+
+> - `docker tag accesshiveapi:dev accesshiveregistry.azurecr.io/accesshiveapi`
+> - `docker push accesshiveregistry.azurecr.io/accesshiveapi`
+
+
+> - `az aks get-credentials --resource-group k8sLearning-rg --name accesshiveaks`
