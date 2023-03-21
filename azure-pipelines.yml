@@ -11,7 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '77df97b0-0400-4bd5-bddf-6a03a4bab9de'
-  imageRepository: 'accesshiveapi'
+  imageRepository: 'joeipeaccesshive'
   containerRegistry: 'accesshiveregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/AccessHive.API/Dockerfile'
   tag: '$(Build.BuildId)'
