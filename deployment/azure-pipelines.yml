@@ -48,4 +48,4 @@ stages:
               azureResourceGroup: 'k8sLearning-rg'
               kubernetesCluster: 'accesshiveaks'
               command: 'apply'
-              arguments: 'kubectl apply -f .\k8s\accesshiveapi.configmap.yml'
+              arguments: '-f .\k8s\accesshiveapi.configmap.yml'
