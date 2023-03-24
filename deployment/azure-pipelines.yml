@@ -31,11 +31,11 @@ stages:
               tags: |
                 latest
 
-  - stage: deploy_to_test
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  - stage: deploy_to_prod
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
-      - job: deployToAppService
-        displayName: "DeployToAppService - Test"
+      - job: deployTok8s
+        displayName: "DeployTok8s - Prod"
         steps:
           - script: echo todo
             displayName: todo
