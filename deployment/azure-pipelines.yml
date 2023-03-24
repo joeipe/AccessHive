@@ -30,3 +30,12 @@ stages:
               buildContext: "$(Build.SourcesDirectory)"
               tags: |
                 latest
+
+  - stage: deploy_to_test
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    jobs:
+      - job: deployToAppService
+        displayName: "DeployToAppService - Test"
+        steps:
+          - script: echo todo
+            displayName: todo
