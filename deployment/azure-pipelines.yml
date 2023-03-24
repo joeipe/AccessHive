@@ -39,3 +39,13 @@ stages:
         steps:
           - script: echo todo
             displayName: todo
+            
+          - task: Kubernetes@1
+            displayName: kubectl apply -f .\k8s\accesshiveapi.configmap.yml
+            inputs:
+              connectionType: 'Azure Resource Manager'
+              azureSubscriptionEndpoint: 'Personal-Sub(57f4859b-8037-4106-ac17-61520b9de19b)'
+              azureResourceGroup: 'k8sLearning-rg'
+              kubernetesCluster: 'accesshiveaks'
+              command: 'apply'
+              arguments: 'kubectl apply -f .\k8s\accesshiveapi.configmap.yml'
