@@ -36,9 +36,9 @@ metadata:
 spec:
   selector:
     app: sqlserver
-  type: NodePort
+  type: LoadBalancer # NodePort
   ports:
     - protocol: TCP
       port: 1433
       targetPort: 1433
-      nodePort: 31433
+      # nodePort: 31433
