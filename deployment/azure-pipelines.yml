@@ -48,5 +48,4 @@ stages:
               azureResourceGroup: "k8sLearning-rg"
               kubernetesCluster: "accesshiveaks"
               command: "apply"
-              arguments: '-f .\k8s\accesshiveapi.configmap.yml'
-              workingDirectory: "$(Build.SourcesDirectory)"
+              arguments: "-f $(Build.SourcesDirectory)/k8s/accesshiveapi.configmap.yml"
