@@ -34,8 +34,8 @@ stages:
   - stage: deploy_to_prod
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
-      - job: deployTok8s
-        displayName: "DeployTok8s - Prod"
+      - job: deployToKubernetes
+        displayName: "DeployToKubernetes - Prod"
         steps:
           - script: echo todo
             displayName: todo
