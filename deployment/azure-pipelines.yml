@@ -28,5 +28,3 @@ stages:
               command: "buildAndPush"
               dockerfile: "$(Build.SourcesDirectory)/AccessHive.API/Dockerfile"
               buildContext: "$(Build.SourcesDirectory)"
-              tags: |
-                $(tag)
