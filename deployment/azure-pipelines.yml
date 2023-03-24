@@ -49,3 +49,4 @@ stages:
               kubernetesCluster: 'accesshiveaks'
               command: 'apply'
               arguments: '-f .\k8s\accesshiveapi.configmap.yml'
+              workingDirectory: $(solutionDir)
