@@ -25,6 +25,7 @@ stages:
             inputs:
               command: build
               dockerfile: "$(Build.SourcesDirectory)/AccessHive.API/Dockerfile"
+              buildContext: "$(Build.SourcesDirectory)"
               tags: |
                 $(tag)
           
