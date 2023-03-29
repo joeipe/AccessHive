@@ -63,8 +63,9 @@ namespace AccessHive.API.Controllers
             return result.IsSuccess ? Ok() : StatusCode(StatusCodes.Status500InternalServerError, result.Error);
         }
 
+
         [HttpGet]
-        public async Task<ActionResult> GetEnvironment()
+        public async Task<ActionResult> GetEnvironmentName()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
