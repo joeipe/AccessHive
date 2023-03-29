@@ -20,8 +20,8 @@
 > - `kubectl config current-context`
 > - `kubectl config use-context <CONTEXT_NAME>`
 
-> - `kubectl config get-contexts`
-> - `kubectl config get-contexts`
+> - `kubectl delete all --all`
+> - `kubectl delete namespace ingress-nginx`
 
 
 > - `az login`
