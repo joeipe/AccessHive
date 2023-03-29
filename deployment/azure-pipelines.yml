@@ -37,6 +37,9 @@ stages:
       - job: deployToKubernetes
         displayName: "DeployToKubernetes - Prod"
         steps:
+          - script: echo $(tag)
+            displayName: "What files are in the folder"
+
           - task: Kubernetes@1
             displayName: kubectl apply -f .\k8s\accesshive-namespace.yml
             inputs:
