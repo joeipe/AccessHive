@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sqlserver-deployment
+  namespace: production
 spec:
   selector:
     matchLabels:
@@ -33,6 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: sqlserver-service
+  namespace: production
 spec:
   selector:
     app: sqlserver
