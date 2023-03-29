@@ -62,5 +62,13 @@ namespace AccessHive.API.Controllers
             var result = await _appService.DeletRoleAsync(id);
             return result.IsSuccess ? Ok() : StatusCode(StatusCodes.Status500InternalServerError, result.Error);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetEnvironment()
+        {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            return Ok(await Task.FromResult(environment));
+        }
     }
 }
