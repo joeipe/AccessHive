@@ -1,0 +1,6 @@
+apiVersion: v2
+name: accesshive
+appVersion: "1.1"
+description: A Helm chart for AccessHive 1.1
+version: 0.1.0
+type: application

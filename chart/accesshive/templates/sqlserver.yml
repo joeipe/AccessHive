@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver-deployment
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  selector:
+    matchLabels:
+      app: sqlserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: sqlserver
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          ports:
+            - containerPort: 1433
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_SA_PASSWORD
+              value: "Admin1234"
+          resources:
+            limits:
+              memory: "2G"
+              cpu: "2000m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver-service
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  selector:
+    app: sqlserver
+  type: {{ .Values.service.type }}
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+      {{- if eq .Values.environment.name "Development" }}
+      nodePort: 31433
+      {{- end }}

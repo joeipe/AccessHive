@@ -9,10 +9,24 @@
     <DockerServiceName>accesshive.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="chart\accesshive\Chart.yaml" />
+    <None Include="chart\accesshive\templates\accesshive-ingress.yml" />
+    <None Include="chart\accesshive\templates\accesshive-namespace.yml" />
+    <None Include="chart\accesshive\templates\accesshiveapi.configmap.yml" />
+    <None Include="chart\accesshive\templates\accesshiveapi.yml" />
+    <None Include="chart\accesshive\templates\rabbitmq.yml" />
+    <None Include="chart\accesshive\templates\sqlserver.yml" />
+    <None Include="deployment\azure-pipelines.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="k8s\accesshive-ingress.yml" />
+    <None Include="k8s\accesshive-namespace.yml" />
+    <None Include="k8s\accesshiveapi.configmap.yml" />
+    <None Include="k8s\accesshiveapi.yml" />
+    <None Include="k8s\rabbitmq.yml" />
+    <None Include="k8s\sqlserver.yml" />
   </ItemGroup>
 </Project>

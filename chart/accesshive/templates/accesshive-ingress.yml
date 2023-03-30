@@ -1,0 +1,19 @@
+{{- if eq .Values.environment.name "Development" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: accesshive-ingress
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  rules:
+    - host: accesshive.local.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: accesshive-api-service
+                port:
+                  number: 80
+{{- end }}

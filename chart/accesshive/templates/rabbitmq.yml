@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  selector:
+    matchLabels:
+      app: rabbitmq
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3.11-management
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmsg-service
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  selector:
+    app: rabbitmq
+  type: {{ .Values.service.type }}
+  ports:
+    - protocol: TCP
+      port: 15672
+      targetPort: 15672
+      {{- if eq .Values.environment.name "Development" }}
+      nodePort: 31533
+      {{- end }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-service
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  clusterIP: None # headless service
+  selector:
+    app: rabbitmq
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672

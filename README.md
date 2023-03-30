@@ -23,7 +23,6 @@
 > - `kubectl delete all --all`
 > - `kubectl delete namespace ingress-nginx`
 
-
 > - `az login`
 > - `az acr login --name accesshiveregistry`
 > - `docker login accesshiveregistry.azurecr.io`
@@ -31,5 +30,19 @@
 > - `docker tag accesshiveapi:dev accesshiveregistry.azurecr.io/accesshiveapi`
 > - `docker push accesshiveregistry.azurecr.io/accesshiveapi`
 
-
 > - `az aks get-credentials --resource-group k8sLearning-rg --name accesshiveaks`
+#### Helm
+> - Run
+> - `helm install local-accesshive .\chart\accesshive`
+> - `helm install local-accesshive .\chart\accesshive --set environment.name=Production --set service.type=LoadBalancer --set image.tag="latest"`
+> - `helm upgrade local-accesshive .\chart\accesshive --set environment.name=Production --set service.type=LoadBalancer --set image.tag="latest"`
+
+> - `helm upgrade local-accesshive .\chart\accesshive`
+> - `helm rollback local-accesshive 1`
+> - `helm history local-accesshive`
+> - `helm status local-accesshive`
+> - `helm get all local-accesshive`
+> - `helm uninstall local-accesshive`
+> - `helm list`
+> - `helm template .\chart\accesshive`
+> - `helm install local-accesshive .\chart\accesshive --dry-run --debug`

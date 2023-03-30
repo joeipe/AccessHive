@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accesshive-api
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  selector:
+    matchLabels:
+      app: accesshive-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: accesshive-api
+    spec:
+      containers:
+        - name: accesshive-api
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }} # accesshiveregistry.azurecr.io/accesshiveapi:latest
+          envFrom:
+            - configMapRef:
+                name: accesshive-api-config
+            # - secretRef:
+            #     name: accesshive-api-secrets
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 80
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 80
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accesshive-api-service
+  namespace: {{ .Values.environment.name | lower }}
+spec:
+  selector:
+    app: accesshive-api
+  type: {{ .Values.service.type }}
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      {{- if eq .Values.environment.name "Development" }}
+      nodePort: 31633
+      {{- end }}

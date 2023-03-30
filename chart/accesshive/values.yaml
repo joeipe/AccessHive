@@ -1,0 +1,7 @@
+environment:
+  name: Development
+service:
+  type: NodePort
+image:
+  repository: joeipe/accesshiveapi
+  tag: "latest"
