@@ -64,7 +64,7 @@ namespace AccessHive.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetEnvironmentName()
+        public async Task<ActionResult> GetEnvironment()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
