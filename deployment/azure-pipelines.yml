@@ -34,12 +34,12 @@ stages:
           - task: Docker@2
             displayName: Build and push an image az
             inputs:
-              containerRegistry: 'accesshiveregistry'
-              repository: 'accesshiveapi'
-              command: 'buildAndPush'
-              Dockerfile: '$(Build.SourcesDirectory)/AccessHive.API/Dockerfile'
-              buildContext: '$(Build.SourcesDirectory)'
-              tags: '$(tag)'
+              containerRegistry: "accesshiveregistry"
+              repository: "accesshiveapi"
+              command: "buildAndPush"
+              Dockerfile: "$(Build.SourcesDirectory)/AccessHive.API/Dockerfile"
+              buildContext: "$(Build.SourcesDirectory)"
+              tags: "$(tag)"
 
   - stage: deploy_to_prod
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
@@ -58,4 +58,4 @@ stages:
               chartType: "FilePath"
               chartPath: "$(Build.SourcesDirectory)/chart/accesshive"
               releaseName: "prod-accesshive"
-              overrideValues: 'environment.name=Production,service.type=LoadBalancer,image.repository=accesshiveregistry.azurecr.io,image.tag="$(tag)"'
+              overrideValues: 'environment.name=Production,service.type=LoadBalancer,image.repository=accesshiveregistry.azurecr.io/accesshiveapi,image.tag="$(tag)"'
