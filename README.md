@@ -34,8 +34,8 @@
 #### Helm
 > - Run
 > - `helm install local-accesshive .\chart\accesshive`
-> - `helm install local-accesshive .\chart\accesshive --set environment.name=Production --set service.type=LoadBalancer --set image.tag="latest"`
-> - `helm upgrade local-accesshive .\chart\accesshive --set environment.name=Production --set service.type=LoadBalancer --set image.tag="latest"`
+> - `helm install prod-accesshive .\chart\accesshive --set environment.name=Production --set service.type=LoadBalancer --set image.tag="latest"`
+> - `helm upgrade prod-accesshive .\chart\accesshive --set environment.name=Production --set service.type=LoadBalancer --set image.tag="latest"`
 
 > - `helm upgrade local-accesshive .\chart\accesshive`
 > - `helm rollback local-accesshive 1`

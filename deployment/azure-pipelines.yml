@@ -38,13 +38,14 @@ stages:
         displayName: "DeployToKubernetes - Prod"
         steps:
           - task: HelmDeploy@0
+            displayName: Helm upgrade
             inputs:
-              connectionType: 'Azure Resource Manager'
-              azureSubscription: 'Personal-Sub(57f4859b-8037-4106-ac17-61520b9de19b)'
-              azureResourceGroup: 'k8sLearning-rg'
-              kubernetesCluster: 'accesshiveaks'
-              command: 'upgrade'
-              chartType: 'FilePath'
-              chartPath: '$(Build.SourcesDirectory)/chart/accesshive'
-              releaseName: 'prod-accesshive'
+              connectionType: "Azure Resource Manager"
+              azureSubscription: "Personal-Sub(57f4859b-8037-4106-ac17-61520b9de19b)"
+              azureResourceGroup: "k8sLearning-rg"
+              kubernetesCluster: "accesshiveaks"
+              command: "upgrade"
+              chartType: "FilePath"
+              chartPath: "$(Build.SourcesDirectory)/chart/accesshive"
+              releaseName: "prod-accesshive"
               overrideValues: 'environment.name=Production,service.type=LoadBalancer,image.tag="latest"'
