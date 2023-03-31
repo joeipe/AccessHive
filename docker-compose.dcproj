@@ -16,6 +16,7 @@
     <None Include="chart\accesshive\templates\accesshiveapi.yml" />
     <None Include="chart\accesshive\templates\rabbitmq.yml" />
     <None Include="chart\accesshive\templates\sqlserver.yml" />
+    <None Include="chart\accesshive\values.yaml" />
     <None Include="deployment\azure-pipelines.yml" />
     <None Include="deployment\azure-pipelines_old.yml" />
     <None Include="docker-compose.override.yml">
