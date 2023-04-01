@@ -4,6 +4,7 @@ services:
   accesshive.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENV_VERSION=v1
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - CONNECTIONSTRINGS__DBCONNECTIONSTRING=Server=sqlserver;Database=AccessHiveDB;User Id=sa;Password=Admin1234;TrustServerCertificate=True
       - CONNECTIONSTRINGS__RMQCONNECTIONSTRING=rabbitmq
