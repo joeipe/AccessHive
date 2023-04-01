@@ -47,4 +47,4 @@ stages:
               chartType: "FilePath"
               chartPath: "$(Build.SourcesDirectory)/chart/accesshive"
               releaseName: "prod-accesshive"
-              overrideValues: 'environment.name=Production,service.type=LoadBalancer,image.repository=accesshiveregistry.azurecr.io/accesshiveapi,image.tag="$(tag)"'
+              overrideValues: "environment.name=Production,service.type=LoadBalancer,image.repository=accesshiveregistry.azurecr.io/accesshiveapi,image.tag=$(tag)"
