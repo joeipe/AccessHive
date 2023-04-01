@@ -50,8 +50,7 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(options =>
     {
-        var envVer = Environment.GetEnvironmentVariable("ASPNETCORE_ENV_VERSION") ?? "";
-        options.SwaggerDoc("v1", new OpenApiInfo { Title = "AccessHive API", Version = $"v{envVer}" });
+        options.SwaggerDoc("v1", new OpenApiInfo { Title = "AccessHive API", Version = $"v{Environment.GetEnvironmentVariable("ASPNETCORE_ENV_VERSION")}" });
         options.DocumentFilter<HealthChecksFilter>();
     });
 
