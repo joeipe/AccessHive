@@ -68,7 +68,8 @@ namespace AccessHive.API.Controllers
         {
             var obj = new List<string>()
             {
-                Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "none"
+                Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "none",
+                Environment.GetEnvironmentVariable("ASPNETCORE_ENV_VERSION") ?? "none"
             };
 
             return Ok(await Task.FromResult(obj));
