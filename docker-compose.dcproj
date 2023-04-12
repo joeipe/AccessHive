@@ -27,6 +27,10 @@
     <None Include="k8s\accesshive-ingress.yml" />
     <None Include="k8s\accesshive-namespace.yml" />
     <None Include="k8s\accesshiveapi.configmap.yml" />
+    <None Include="k8s\accesshiveapi.dev.conf" />
+    <None Include="k8s\accesshiveapi.dev.crt" />
+    <None Include="k8s\accesshiveapi.dev.key" />
+    <None Include="k8s\accesshiveapi.dev.pfx" />
     <None Include="k8s\accesshiveapi.local.conf" />
     <None Include="k8s\accesshiveapi.local.crt" />
     <None Include="k8s\accesshiveapi.local.key" />
