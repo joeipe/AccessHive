@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sqlserver-deployment
-  namespace: production
+  namespace: development
 spec:
   selector:
     matchLabels:
@@ -34,13 +34,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: sqlserver-service
-  namespace: production
+  namespace: development
 spec:
   selector:
     app: sqlserver
-  type: LoadBalancer # NodePort
+  type: NodePort # LoadBalancer
   ports:
     - protocol: TCP
       port: 1433
       targetPort: 1433
-      # nodePort: 31433
+      nodePort: 31433

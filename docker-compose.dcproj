@@ -27,8 +27,18 @@
     <None Include="k8s\accesshive-ingress.yml" />
     <None Include="k8s\accesshive-namespace.yml" />
     <None Include="k8s\accesshiveapi.configmap.yml" />
+    <None Include="k8s\accesshiveapi.local.conf" />
+    <None Include="k8s\accesshiveapi.local.crt" />
+    <None Include="k8s\accesshiveapi.local.key" />
+    <None Include="k8s\accesshiveapi.local.pfx" />
     <None Include="k8s\accesshiveapi.yml" />
     <None Include="k8s\rabbitmq.yml" />
     <None Include="k8s\sqlserver.yml" />
+    <None Include="nginx\accesshiveapi.local.conf" />
+    <None Include="nginx\accesshiveapi.local.crt" />
+    <None Include="nginx\accesshiveapi.local.key" />
+    <None Include="nginx\accesshiveapi.local.pfx" />
+    <None Include="nginx\nginx.Dockerfile" />
+    <None Include="nginx\nginx.local.conf" />
   </ItemGroup>
 </Project>

@@ -10,6 +10,8 @@ using AccessHive.Write.Data.CommandHandlers;
 using AccessHive.Write.Data.EventDispatchers;
 using AccessHive.Write.Data.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
@@ -61,6 +63,16 @@ try
         .AddRabbitMQConnectionHealthCheck(builder.Configuration.GetConnectionString("RMQConnectionString"), "Rabbit MQ", HealthStatus.Unhealthy);
 
     var app = builder.Build();
+
+    /*
+    var forwardedHeadersOptions = new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    };
+    forwardedHeadersOptions.KnownNetworks.Clear();
+    //forwardedHeadersOptions.KnownProxies.Clear();
+    app.UseForwardedHeaders(forwardedHeadersOptions);
+    */
 
     app.UseSerilogRequestLogging();
 

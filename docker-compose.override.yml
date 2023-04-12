@@ -5,12 +5,14 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_ENV_VERSION=1
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      #- ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_URLS=https://*:5001
       - CONNECTIONSTRINGS__DBCONNECTIONSTRING=Server=sqlserver;Database=AccessHiveDB;User Id=sa;Password=Admin1234;TrustServerCertificate=True
       - CONNECTIONSTRINGS__RMQCONNECTIONSTRING=rabbitmq
     ports:
-      - "80"
-      - "443"
+      #- "80"
+      #- "443"
+      - "5001:5001"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
