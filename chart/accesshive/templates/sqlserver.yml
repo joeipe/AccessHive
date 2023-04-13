@@ -38,11 +38,11 @@ metadata:
 spec:
   selector:
     app: sqlserver
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service.typeSql }}
   ports:
     - protocol: TCP
       port: 1433
       targetPort: 1433
-      {{- if eq .Values.environment.name "Development" }}
+      {{- if eq .Values.service.typeSql "NodePort" }}
       nodePort: 31433
       {{- end }}

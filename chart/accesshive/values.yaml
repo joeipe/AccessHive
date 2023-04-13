@@ -1,7 +1,8 @@
 environment:
   name: Development
 service:
-  type: NodePort
+  typeSql: NodePort
+  type: ClusterIP
 image:
   repository: joeipe/accesshiveapi
   tag: "latest"

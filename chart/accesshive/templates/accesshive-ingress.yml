@@ -1,12 +1,28 @@
-{{- if eq .Values.environment.name "Development" }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: accesshive-ingress
   namespace: {{ .Values.environment.name | lower }}
 spec:
+  ingressClassName: nginx
+  {{- if eq .Values.environment.name "Development" }}
+  tls:
+    - hosts:
+        - accesshiveapi.dev.com
+      secretName: accesshiveapidev-tls
+  {{- end }}
   rules:
-    - host: accesshive.local.com
+    - host: rabbitmq.dev.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: rabbitmsg-service
+                port:
+                  number: 80
+    - host: accesshiveapi.dev.com
       http:
         paths:
           - pathType: Prefix
@@ -16,4 +32,3 @@ spec:
                 name: accesshive-api-service
                 port:
                   number: 80
-{{- end }}

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: accesshive-api
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }} # accesshiveregistry.azurecr.io/accesshiveapi:latest
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           envFrom:
             - configMapRef:
                 name: accesshive-api-config
@@ -58,6 +58,6 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      {{- if eq .Values.environment.name "Development" }}
+      {{- if eq .Values.service.type "NodePort" }}
       nodePort: 31633
       {{- end }}

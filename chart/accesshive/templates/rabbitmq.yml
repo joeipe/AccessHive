@@ -38,7 +38,7 @@ spec:
     - protocol: TCP
       port: 15672
       targetPort: 15672
-      {{- if eq .Values.environment.name "Development" }}
+      {{- if eq .Values.service.type "NodePort" }}
       nodePort: 31533
       {{- end }}
 
