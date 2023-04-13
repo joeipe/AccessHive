@@ -1,5 +1,6 @@
 environment:
   name: Development
+  shortName: dev
 service:
   typeSql: NodePort
   type: ClusterIP
