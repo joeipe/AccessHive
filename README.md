@@ -36,8 +36,8 @@
 #### Helm
 > - Run
 > - `helm install local-accesshive .\chart\accesshive`
-> - `helm install prod-accesshive .\chart\accesshive --set environment.name=Production --set service.typeSql=LoadBalancer --set service.type=ClusterIP --set image.repository=accesshiveregistry.azurecr.io/accesshiveapi --set image.tag="262"`
-> - `helm upgrade prod-accesshive .\chart\accesshive --set environment.name=Production --set service.typeSql=LoadBalancer --set service.type=ClusterIP --set image.repository=accesshiveregistry.azurecr.io/accesshiveapi --set image.tag="262"`
+> - `helm install prod-accesshive .\chart\accesshive --set environment.name=Production --set environment.shortName=prd --set service.typeSql=LoadBalancer --set service.type=ClusterIP --set image.repository=accesshiveregistry.azurecr.io/accesshiveapi --set image.tag="262"`
+> - `helm upgrade prod-accesshive .\chart\accesshive --set environment.name=Production --set environment.shortName=prd --set service.typeSql=LoadBalancer --set service.type=ClusterIP --set image.repository=accesshiveregistry.azurecr.io/accesshiveapi --set image.tag="262"`
 
 > - `helm upgrade local-accesshive .\chart\accesshive`
 > - `helm rollback local-accesshive 1`
