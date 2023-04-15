@@ -12,8 +12,8 @@ spec:
       secretName: accesshiveapidev-tls
   {{- end }}
   rules:
-    # - host: rabbitmq.{{ .Values.environment.shortName }}.com
-    -  http:
+    - host: rabbitmq.{{ .Values.environment.shortName }}.com
+      http:
         paths:
           - pathType: Prefix
             path: /
@@ -21,9 +21,9 @@ spec:
               service:
                 name: rabbitmsg-service
                 port:
-                  number: 80
-    # - host: accesshiveapi.{{ .Values.environment.shortName }}.com
-    -  http:
+                  number: 15672
+    - host: accesshiveapi.{{ .Values.environment.shortName }}.com
+      http:
         paths:
           - pathType: Prefix
             path: /
